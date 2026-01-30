@@ -1,0 +1,103 @@
+# MkDocs Configuration for T2T-C10GX Documentation
+# Build with: mkdocs build
+# Serve locally: mkdocs serve
+
+site_name: T2T-C10GX Documentation
+site_description: FPGA Tick-to-Trade Pipeline Documentation
+site_author: T2T Project
+site_url: https://t2t-c10gx.readthedocs.io/
+
+repo_name: t2t-c10gx
+repo_url: https://github.com/example/t2t-c10gx
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+
+plugins:
+  - search
+  - mermaid2
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Quick Start: getting-started/quickstart.md
+    - Hardware Setup: getting-started/hardware.md
+    - Software Installation: getting-started/software.md
+  - Architecture:
+    - Overview: architecture/overview.md
+    - Data Flow: architecture/dataflow.md
+    - Clock Domains: architecture/clocks.md
+  - RTL Reference:
+    - Package Types: rtl/package.md
+    - MAC Wrapper: rtl/mac.md
+    - Parser Pipeline: rtl/parser.md
+    - Order Book: rtl/book.md
+    - Risk Gate: rtl/risk.md
+    - PCIe DMA: rtl/pcie.md
+    - CSR Block: rtl/csr.md
+  - Software:
+    - Driver API: software/api.md
+    - Tools Reference: software/tools.md
+    - Configuration: software/config.md
+  - Integration:
+    - Quartus Setup: integration/quartus.md
+    - Pin Assignment: integration/pins.md
+    - Timing Closure: integration/timing.md
+  - Performance:
+    - Latency Analysis: performance/latency.md
+    - Benchmarking: performance/benchmarks.md
+  - API Reference:
+    - Register Map: api/registers.md
+    - DMA Record Format: api/dma.md
+  - Development:
+    - Building: development/build.md
+    - Testing: development/testing.md
+    - Contributing: development/contributing.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/example/t2t-c10gx

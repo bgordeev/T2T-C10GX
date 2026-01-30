@@ -1,0 +1,17 @@
+# udev rules for T2T-C10GX FPGA device
+#
+# Install: sudo cp 99-t2t.rules /etc/udev/rules.d/
+# Reload:  sudo udevadm control --reload-rules && sudo udevadm trigger
+#
+
+# T2T FPGA device - allow access for users in 't2t' group
+SUBSYSTEM=="uio", ATTR{name}=="t2t*", MODE="0660", GROUP="t2t"
+
+# VFIO devices - allow access for users in 'vfio' group
+SUBSYSTEM=="vfio", MODE="0666"
+
+# Hugepages - allow access for users in 't2t' group
+SUBSYSTEM=="misc", KERNEL=="hugepages", MODE="0660", GROUP="t2t"
+
+# Memory locking limits (add to /etc/security/limits.conf instead)
+# @t2t - memlock unlimited

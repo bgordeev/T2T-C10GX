@@ -1,0 +1,142 @@
+# =============================================================================
+# T2T-C10GX Pin Assignments
+# =============================================================================
+# Target: Cyclone 10 GX 10GX220YF780E5G (F780 package)
+#
+# NOTE: These are example pin assignments. Actual assignments depend on
+#       the specific development board or carrier card being used.
+#       Update these to match your hardware.
+# =============================================================================
+
+# =============================================================================
+# Clock Inputs
+# =============================================================================
+
+# 156.25 MHz SFP+ reference clock (differential)
+set_location_assignment PIN_W10 -to refclk_156p25
+set_instance_assignment -name IO_STANDARD "LVDS" -to refclk_156p25
+
+# 100 MHz reference clock
+set_location_assignment PIN_R9 -to refclk_100
+set_instance_assignment -name IO_STANDARD "1.8 V" -to refclk_100
+
+# PCIe reference clock (100 MHz, differential)
+set_location_assignment PIN_AJ25 -to pcie_refclk
+set_instance_assignment -name IO_STANDARD "HCSL" -to pcie_refclk
+
+# =============================================================================
+# Reset
+# =============================================================================
+
+set_location_assignment PIN_G20 -to rst_n
+set_instance_assignment -name IO_STANDARD "1.8 V" -to rst_n
+
+# =============================================================================
+# SFP+ Interface (Transceiver Bank 1D)
+# =============================================================================
+
+# SFP+ RX (high-speed serial)
+set_location_assignment PIN_AE1 -to sfp_rx_p
+set_instance_assignment -name IO_STANDARD "CURRENT MODE LOGIC (CML)" -to sfp_rx_p
+set_instance_assignment -name XCVR_VCCR_VCCT_VOLTAGE 1_0V -to sfp_rx_p
+
+# SFP+ TX (high-speed serial)
+set_location_assignment PIN_AD3 -to sfp_tx_p
+set_instance_assignment -name IO_STANDARD "CURRENT MODE LOGIC (CML)" -to sfp_tx_p
+set_instance_assignment -name XCVR_VCCR_VCCT_VOLTAGE 1_0V -to sfp_tx_p
+
+# SFP+ Control signals
+set_location_assignment PIN_H19 -to sfp_tx_disable
+set_instance_assignment -name IO_STANDARD "1.8 V" -to sfp_tx_disable
+
+set_location_assignment PIN_J18 -to sfp_los
+set_instance_assignment -name IO_STANDARD "1.8 V" -to sfp_los
+
+set_location_assignment PIN_K18 -to sfp_mod_det
+set_instance_assignment -name IO_STANDARD "1.8 V" -to sfp_mod_det
+
+# =============================================================================
+# PCIe Interface (x4 lanes)
+# =============================================================================
+
+# PCIe RX lanes
+set_location_assignment PIN_AK26 -to pcie_rx_p[0]
+set_location_assignment PIN_AJ28 -to pcie_rx_p[1]
+set_location_assignment PIN_AG28 -to pcie_rx_p[2]
+set_location_assignment PIN_AE28 -to pcie_rx_p[3]
+
+set_instance_assignment -name IO_STANDARD "CURRENT MODE LOGIC (CML)" -to pcie_rx_p[*]
+set_instance_assignment -name XCVR_VCCR_VCCT_VOLTAGE 1_0V -to pcie_rx_p[*]
+
+# PCIe TX lanes
+set_location_assignment PIN_AL24 -to pcie_tx_p[0]
+set_location_assignment PIN_AK27 -to pcie_tx_p[1]
+set_location_assignment PIN_AH28 -to pcie_tx_p[2]
+set_location_assignment PIN_AF28 -to pcie_tx_p[3]
+
+set_instance_assignment -name IO_STANDARD "CURRENT MODE LOGIC (CML)" -to pcie_tx_p[*]
+set_instance_assignment -name XCVR_VCCR_VCCT_VOLTAGE 1_0V -to pcie_tx_p[*]
+
+# PCIe PERST#
+set_location_assignment PIN_AM27 -to pcie_perst_n
+set_instance_assignment -name IO_STANDARD "1.8 V" -to pcie_perst_n
+
+# =============================================================================
+# GPIO - Latency Measurement Pulse
+# =============================================================================
+
+# High-speed GPIO for oscilloscope latency measurement
+set_location_assignment PIN_A17 -to gpio_latency_pulse
+set_instance_assignment -name IO_STANDARD "1.8 V" -to gpio_latency_pulse
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to gpio_latency_pulse
+set_instance_assignment -name SLEW_RATE 2 -to gpio_latency_pulse
+
+# =============================================================================
+# GPIO - Status LEDs
+# =============================================================================
+
+set_location_assignment PIN_B17 -to gpio_status_led[0]
+set_location_assignment PIN_C17 -to gpio_status_led[1]
+set_location_assignment PIN_D17 -to gpio_status_led[2]
+set_location_assignment PIN_E17 -to gpio_status_led[3]
+set_location_assignment PIN_F17 -to gpio_status_led[4]
+set_location_assignment PIN_G17 -to gpio_status_led[5]
+set_location_assignment PIN_H17 -to gpio_status_led[6]
+set_location_assignment PIN_J17 -to gpio_status_led[7]
+
+set_instance_assignment -name IO_STANDARD "1.8 V" -to gpio_status_led[*]
+
+# =============================================================================
+# Debug - Heartbeat
+# =============================================================================
+
+set_location_assignment PIN_K17 -to debug_heartbeat
+set_instance_assignment -name IO_STANDARD "1.8 V" -to debug_heartbeat
+
+# =============================================================================
+# Global Assignments
+# =============================================================================
+
+# Dual-purpose pins
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED"
+
+# Configuration pins
+set_global_assignment -name CYCLONEIII_CONFIGURATION_SCHEME "ACTIVE SERIAL X4"
+set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "ACTIVE SERIAL X4"
+set_global_assignment -name ACTIVE_SERIAL_CLOCK FREQ_100MHZ
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+
+# Internal oscillator (for configuration)
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+
+# =============================================================================
+# I/O Standards
+# =============================================================================
+
+# Default I/O standard
+set_global_assignment -name STRATIXII_CONFIGURATION_SCHEME "ACTIVE SERIAL"
+set_global_assignment -name GENERATE_RBF_FILE ON
+
+# JTAG
+set_global_assignment -name ENABLE_JTAG_PIN_SHARING OFF
