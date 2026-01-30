@@ -174,9 +174,7 @@ mkdocs serve
 Key documentation pages:
 - [Architecture](docs/architecture.md) - Detailed block diagrams and dataflow
 - [Register Map](docs/register_map.md) - Complete CSR documentation
-- [Bring-up Guide](docs/bringup.md) - Hardware setup
-- [Benchmarking](docs/benchmarking.md) - How to measure performance
-- [Results](docs/results.md) - Performance data
+
 
 
 
